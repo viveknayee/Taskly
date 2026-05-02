@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Signup{% endblock %}
+
+{% block body %}
+<div class="auth-wrap">
+    <div class="auth-box">
+
+        <div class="auth-logo">✅</div>
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-sub">Start organizing your life today.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for cat, msg in messages %}
+        {% if cat == 'error' %}
+        <div class="alert-error">⚠️ {{ msg }}</div>
+        {% else %}
+        <div class="alert-success">✅ {{ msg }}</div>
+        {% endif %}
+        {% endfor %}
+        {% endwith %}
+
+        <form method="POST" action="/signup">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn-main w-100">Create Account →</button>
+        </form>
+
+        <p class="auth-switch">Already have account? <a href="/login">Login</a></p>
+    </div>
+</div>
+{% endblock %}

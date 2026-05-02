@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<div class="auth-wrap">
+    <div class="auth-box">
+
+        <div class="auth-logo">✅</div>
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-sub">Login to your account.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for cat, msg in messages %}
+        {% if cat == 'error' %}
+        <div class="alert-error">⚠️ {{ msg }}</div>
+        {% else %}
+        <div class="alert-success">✅ {{ msg }}</div>
+        {% endif %}
+        {% endfor %}
+        {% endwith %}
+
+        <form method="POST" action="/login">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn-main w-100">Login →</button>
+        </form>
+
+        <p class="auth-switch">No account? <a href="/signup">Sign up free</a></p>
+    </div>
+</div>
+{% endblock %}
